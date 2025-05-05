@@ -11,6 +11,7 @@ import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.react.soloader.OpenSourceMergedSoMapping
 import com.facebook.soloader.SoLoader
+import com.otahotupdate.OtaHotUpdate
 
 class MainApplication : Application(), ReactApplication {
 
@@ -32,6 +33,10 @@ class MainApplication : Application(), ReactApplication {
 
   override val reactHost: ReactHost
     get() = getDefaultReactHost(applicationContext, reactNativeHost)
+
+  override fun getJSBundleFile(): String? {
+      return OtaHotUpdate.bundleJS(this@MainApplication)
+  }
 
   override fun onCreate() {
     super.onCreate()

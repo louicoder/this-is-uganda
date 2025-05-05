@@ -2,6 +2,7 @@ import UIKit
 import React
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
+import react_native_ota_hot_update
 
 @main
 class AppDelegate: RCTAppDelegate {
@@ -24,7 +25,10 @@ class AppDelegate: RCTAppDelegate {
 #if DEBUG
     RCTBundleURLProvider.sharedSettings().jsBundleURL(forBundleRoot: "index")
 #else
-    Bundle.main.url(forResource: "main", withExtension: "jsbundle")
+    // Bundle.main.url(forResource: "main", withExtension: "jsbundle")
+    // OTA managed bundle handling:
+    // https://github.com/vantuan88291/react-native-ota-hot-update
+    OtaHotUpdate.getBundle()
 #endif
   }
 }
