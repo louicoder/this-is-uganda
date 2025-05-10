@@ -1,18 +1,3 @@
-// import React, { useEffect } from 'react';
-// import { TextInput, View, Text } from 'react-native';
-// import { Heart } from 'lucide-react-native';
-// const App = () => {
-
-
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Text style={{ fontSize: 20 }}>This is Uganda{''}</Text>
-//       <Text style={{ fontSize: 16, color: '#aaa' }}>Coming soon...{''}</Text>
-//     </View>
-//   );
-// };
-
-// export default App;
 
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
@@ -26,16 +11,16 @@ import Svg, { G, Path } from 'react-native-svg';
 
 const App = () => {
   const opacity = useSharedValue(0);
-  const scale = useSharedValue(5); // start far away (big scale)
+  const scale = useSharedValue(10); // start far away (big scale)
 
   useEffect(() => {
     opacity.value = withTiming(1, {
-      duration: 1000,
+      duration: 500,
       easing: Easing.out(Easing.exp),
     });
 
     scale.value = withTiming(1, {
-      duration: 1000,
+      duration: 500,
       easing: Easing.out(Easing.exp),
     });
   }, []);
@@ -51,6 +36,7 @@ const App = () => {
 
   return (
     <View style={styles.container}>
+
       <AnimatedText style={[styles.title, animatedStyle]}>
         This is Uganda
       </AnimatedText>
@@ -58,7 +44,7 @@ const App = () => {
         Coming soon...
       </AnimatedText>
 
-      <Svg
+      {/* <Svg
         width="100"
         height="100"
         viewBox="0 0 24 24"
@@ -88,7 +74,7 @@ const App = () => {
             </G>
           </G>
         </G>
-      </Svg>
+      </Svg> */}
     </View>
   );
 };
