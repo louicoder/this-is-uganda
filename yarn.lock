@@ -6340,6 +6340,16 @@ react-native-mmkv@^3.2.0:
   resolved "https://registry.yarnpkg.com/react-native-mmkv/-/react-native-mmkv-3.2.0.tgz#460723eb23b9cc92c65b0416eae9874a6ddf5b82"
   integrity sha512-9y7K//1MaU46TFrXkyU0wT5VGk9Y2FDLFV6NPl+z3jTbm2G7SC1UIxneF6CfhSmBX5CfKze9SO7kwDuRx7flpQ==
 
+react-native-nitro-haptics@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-nitro-haptics/-/react-native-nitro-haptics-0.1.0.tgz#1fc315814fbace0a9fc24a7468b262512fd66d59"
+  integrity sha512-oEXjK7FHz7TU9d83pTLXtDqHJNQbeKmy9UDBPK6o1tChkKjjM2w1lp/bdqOwHPvh/+a2sZH3ILTnCT2Pi0sAew==
+
+react-native-nitro-modules@^0.25.2:
+  version "0.25.2"
+  resolved "https://registry.yarnpkg.com/react-native-nitro-modules/-/react-native-nitro-modules-0.25.2.tgz#3d03869934854d7509c2f0dbaf4dca83d6969faf"
+  integrity sha512-rL+X0LzB8BXvpdrUE/+oZ5v4qS/1nZIq0M8Uctbvqq2q53sVCHX4995ffT8+lGIJe/f0QcBvvrEeXtBPl86iwQ==
+
 react-native-ota-hot-update@^2.2.9:
   version "2.2.9"
   resolved "https://registry.yarnpkg.com/react-native-ota-hot-update/-/react-native-ota-hot-update-2.2.9.tgz#469aeaac7f01812e03f09506a464f6588ebe8a5b"
