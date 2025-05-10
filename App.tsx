@@ -8,6 +8,7 @@ import Animated, {
   Easing,
 } from 'react-native-reanimated';
 import {Moon, Sun} from 'lucide-react-native';
+import {Haptics} from 'react-native-nitro-haptics';
 
 const App = () => {
   const opacity = useSharedValue(0);
@@ -35,6 +36,11 @@ const App = () => {
 
   const AnimatedText = Animated.createAnimatedComponent(Text);
 
+  const toggleThemeHandler = () => {
+    Haptics.impact('heavy');
+    toggleTheme();
+  };
+
   return (
     <View
       style={[
@@ -55,20 +61,12 @@ const App = () => {
       </AnimatedText>
 
       <TouchableOpacity
-        onPress={toggleTheme}
-        style={{
-          position: 'absolute',
-          top: 15,
-          right: 15,
-          width: 40,
-          height: 40,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
+        onPress={toggleThemeHandler}
+        style={styles.buttonContainer}>
         {!isDarkMode ? (
           <Moon size={30} color={'black'} />
         ) : (
-          <Sun size={30} color={'white'} />
+          <Sun size={30} color={'black'} />
         )}
       </TouchableOpacity>
     </View>
@@ -89,6 +87,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#aaa',
     marginTop: 8,
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 30,
+    right: 30,
+    width: 50,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ddd',
+    borderRadius: 10,
   },
 });
 
