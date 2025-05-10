@@ -28,6 +28,8 @@ const Typography: React.FC<TypographyProps> = ({
     fontFamily = 'Roboto-Bold';
   } else if (italic) {
     fontFamily = 'Roboto-Italic';
+  } else {
+    fontFamily = 'Roboto-Regular';
   }
 
   return (
@@ -41,7 +43,6 @@ const Typography: React.FC<TypographyProps> = ({
           color,
           fontFamily,
           fontWeight: bold ? 'bold' : 'normal',
-          fontStyle: italic ? 'italic' : 'normal',
           textDecorationLine: underline ? 'underline' : 'none',
           fontSize: size,
           textAlign: align,

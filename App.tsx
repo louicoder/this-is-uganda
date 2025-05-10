@@ -24,9 +24,9 @@ const App = () => {
       ]}>
       <Typography
         style={[styles.title, {color: isDarkMode ? 'white' : 'black'}]}
-        onPress={toggleTheme}
         text="This is Uganda"
         underline
+        bold
       />
 
       <Typography style={[styles.subtitle]} text="Coming soon..." />
@@ -49,7 +49,12 @@ const App = () => {
         align="center"
       />
 
-      <Typography text={Config.LINK} />
+      <Typography
+        text={Config.LINK}
+        style={{color: isDarkMode ? 'orange' : 'blue', marginTop: 40}}
+        italic
+        underline
+      />
     </View>
   );
 };
