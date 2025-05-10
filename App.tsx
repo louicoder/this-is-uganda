@@ -52,9 +52,10 @@ const App = () => {
       <Typography
         text={Config.LINK}
         style={{color: isDarkMode ? 'orange' : 'blue', marginTop: 40}}
-        italic
-        underline
-      />
+        align="center"
+        underline>
+        <Typography text={'\n\nhttps://instagram.com/louicoder'} underline />
+      </Typography>
     </View>
   );
 };
