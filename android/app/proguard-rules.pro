@@ -11,6 +11,8 @@
 
 -keep class com.shopify.reactnative.skia.** { *; }
 
+-keep public class **.BuildConfig { *; }
+
 -keep public class com.dylanvann.fastimage.* {*;}
 -keep public class com.dylanvann.fastimage.** {*;}
 -keep public class * implements com.bumptech.glide.module.GlideModule
