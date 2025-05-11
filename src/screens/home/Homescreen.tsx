@@ -1,12 +1,12 @@
-import {useTheme} from '@/hooks/useTheme';
 import React from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {Moon, Sun} from 'lucide-react-native';
 import {Haptics} from 'react-native-nitro-haptics';
 import {Typography} from '@/components';
 import Config from 'react-native-config';
+import {useTheme} from '@/hooks/useTheme';
 
-const App = () => {
+const Home = () => {
   const {toggleTheme, isDarkMode} = useTheme();
 
   const toggleThemeHandler = () => {
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Home;
