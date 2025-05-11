@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text} from 'react-native';
-import {TypographyProps} from '@/components/index';
+import {TypographyProps} from '@/components/types';
 import styles from './styles';
 
 const Typography: React.FC<TypographyProps> = ({

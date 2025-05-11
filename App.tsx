@@ -3,10 +3,8 @@ import React from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {Moon, Sun} from 'lucide-react-native';
 import {Haptics} from 'react-native-nitro-haptics';
-import Typography from '@/components/Typography';
+import {Typography} from '@/components';
 import Config from 'react-native-config';
-
-console.log(Config.LINK);
 
 const App = () => {
   const {toggleTheme, isDarkMode} = useTheme();
