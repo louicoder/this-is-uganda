@@ -25,6 +25,7 @@
     "react-native": "0.77.0",
     "react-native-blob-util": "^0.21.2",
     "react-native-compressor": "^1.11.0",
+    "react-native-config": "^1.5.5",
     "react-native-gesture-handler": "^2.25.0",
     "react-native-mmkv": "^3.2.0",
     "react-native-nitro-haptics": "^0.1.0",
