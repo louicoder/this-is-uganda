@@ -1,54 +1,60 @@
 import React from 'react';
-import {View, Text, Pressable} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Home} from '@/screens/home/index';
-import {HomeIcon, Binoculars, UserRound, Search} from 'lucide-react-native';
-import {useTheme} from '@/hooks/useTheme';
+import { View, Text, Pressable } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Home } from '@/screens/home/index';
+import { HomeIcon, Binoculars, UserRound, Search } from 'lucide-react-native';
+import { useTheme } from '@/hooks/useTheme';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 const Tab = createBottomTabNavigator();
 
 const SearchScreen = () => (
-  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text>Search!</Text>
   </View>
 );
 
 const ProfileScreen = () => (
-  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text>Profile!</Text>
   </View>
 );
 
 const DestinationScreen = () => (
-  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     <Text>Destination!</Text>
   </View>
 );
 
-const Comp = ({name}: {name: string}) => (
-  <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    <Text style={{fontSize: 20}}>{name}</Text>
+const Comp = ({ name }: { name: string }) => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text style={{ fontSize: 20 }}>{name}</Text>
   </View>
 );
 
-export default function BottomTabsNavigator() {
-  const {isDarkMode} = useTheme();
+export default function BottomTabsNavigator () {
+  const { isDarkMode } = useTheme();
+  // const bottom = useSafeAreaInsets().bottom;
   return (
     <Tab.Navigator
-      screenLayout={props => (
-        <View
-          style={{flex: 1, backgroundColor: isDarkMode ? 'black' : 'white'}}>
-          {props.children}
-        </View>
-      )}
-      screenOptions={({route}) => ({
+      safeAreaInsets={undefined}
+      tabBar={props => null}
+      // screenLayout={props => (
+      //   <View
+      //     style={{flex: 1, backgroundColor: isDarkMode ? 'black' : 'white'}}>
+      //     {props.children}
+      //   </View>
+      // )}
+      screenOptions={({ route }) => ({
+        headerShown: false,
         sceneStyle: {
-          backgroundColor: isDarkMode ? 'black' : 'red',
+          // backgroundColor: isDarkMode ? 'black' : 'red',
         },
 
         // headerShown: false,
-        tabBarStyle: {backgroundColor: isDarkMode ? 'black' : 'white'},
+        tabBarStyle: { backgroundColor: isDarkMode ? 'black' : 'white' },
+
         // animation: 'shift',
-        tabBarIcon: ({color}) => {
+        tabBarIcon: ({ color }) => {
           switch (route.name) {
             case 'Home':
               return <HomeIcon color={color} size={24} />;
@@ -66,7 +72,7 @@ export default function BottomTabsNavigator() {
         tabBarButton: props => (
           <Pressable
             onPress={props.onPress}
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             {props.children}
           </Pressable>
         ),

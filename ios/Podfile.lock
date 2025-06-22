@@ -49,7 +49,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - NitroModules (0.25.2):
+  - NitroModules (0.26.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1429,7 +1429,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-skia (2.0.0):
+  - react-native-skia (1.12.4):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2326,7 +2326,7 @@ SPEC CHECKSUMS:
   libdav1d: 23581a4d8ec811ff171ed5e2e05cd27bad64c39f
   libwebp: 02b23773aedb6ff1fd38cec7a77b81414c6842a8
   NitroHaptics: 55ce0d5a762f267599ce5b4b4a374fb6e1800817
-  NitroModules: 6cad985fa4a6efaf567fe5c9aa464bce17e2d0cc
+  NitroModules: 10edf8d5443783bef1c0c9468a53a7438a4c21b3
   RCT-Folly: 36fe2295e44b10d831836cc0d1daec5f8abcf809
   RCTDeprecation: f5c19ebdb8804b53ed029123eb69914356192fc8
   RCTRequired: 6ae6cebe470486e0e0ce89c1c0eabb998e7c51f4
@@ -2362,7 +2362,7 @@ SPEC CHECKSUMS:
   react-native-mmkv: 55e8a074ae9cb919609755d7271c16b242c2603f
   react-native-ota-hot-update: a3cfa1791a62ff770078f6938e6d85565b07fbae
   react-native-safe-area-context: 9b169299f9dc95f1d7fe1dd266fde53bd899cd0c
-  react-native-skia: 7bec6b00c26639ae45ebb71d84ad2fad335a3d86
+  react-native-skia: c12d01b3112c96a6ee2e375f173b435a1edca9ef
   react-native-vector-icons: d006f05b7cb1f600e12ea450b738abf5c137c6ee
   React-nativeconfig: cd0fbb40987a9658c24dab5812c14e5522a64929
   React-NativeModulesApple: 45187d13c68d47250a7416b18ff082c7cc07bff7
