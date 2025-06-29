@@ -30,6 +30,7 @@
 		D80F6E83EA084DCEA671DEEB /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EA776887D8E741EC84D45082 /* Roboto-Black.ttf */; };
 		DD659F39A0A54BE580868CBD /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F9E2C674E7AA4EF89B9482F0 /* Roboto-Italic.ttf */; };
 		E5A486590CB44D58A4398802 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 802475F6AA504254858FE949 /* Roboto-BlackItalic.ttf */; };
+		E9B9B93040C443B5805DD042 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6E6CA73203B241F7A8BC20FF /* Config.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		5709B34CF0A7D63546082F79 /* Pods-thisisuganda.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thisisuganda.release.xcconfig"; path = "Target Support Files/Pods-thisisuganda/Pods-thisisuganda.release.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-thisisuganda.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-thisisuganda.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		64A5A1CD690943419217612D /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-MediumItalic.ttf"; path = "../src/assets/fonts/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
+		6E6CA73203B241F7A8BC20FF /* Config.xcconfig */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = thisisuganda/AppDelegate.swift; sourceTree = "<group>"; };
 		802475F6AA504254858FE949 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BlackItalic.ttf"; path = "../src/assets/fonts/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = thisisuganda/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				6E6CA73203B241F7A8BC20FF /* Config.xcconfig */,
 				13B07FAE1A68108700A75B9A /* thisisuganda */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -221,6 +224,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9B9B93040C443B5805DD042 /* Config.xcconfig in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				2B7BBA29400E91894F3DF8EB /* PrivacyInfo.xcprivacy in Resources */,
@@ -390,6 +394,7 @@
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E6CA73203B241F7A8BC20FF /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -470,6 +475,7 @@
 		};
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E6CA73203B241F7A8BC20FF /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
