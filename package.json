@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@dr.pogodin/react-native-fs": "^2.33.1",
+    "@gorhom/bottom-sheet": "^5",
     "@legendapp/list": "^1.0.11",
     "@preact/signals-react": "^3.0.1",
     "@react-native-vector-icons/common": "^12.2.0",
@@ -23,6 +24,7 @@
     "lucide-react-native": "^0.534.0",
     "react": "19.1.0",
     "react-native": "0.80.2",
+    "react-native-audio-pro": "^9.9.1",
     "react-native-blob-util": "^0.22.2",
     "react-native-compressor": "^1.11.0",
     "react-native-config": "^1.5.5",
