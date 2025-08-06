@@ -7,6 +7,7 @@ import Typography from './Typography';
 import { isRadioPlayerVisible } from '@/signals/global';
 import { LucideHeart } from 'lucide-react-native';
 import { RFVALUE } from '@/constants/index';
+import { useTheme } from '@/hooks/useTheme';
 
 type StationProps = {
   item: TrackProps;
@@ -15,6 +16,7 @@ type StationProps = {
 
 const RadioStationPreview: React.FC<StationProps> = ({ item, index }) => {
   const { BOTTOM } = useResponsiveFontSize();
+  const { isDarkMode } = useTheme();
 
   const setActiveTrack = useCallback(
     (track: TrackProps) => {
@@ -31,18 +33,20 @@ const RadioStationPreview: React.FC<StationProps> = ({ item, index }) => {
       style={[
         styles.container,
         {
-          borderTopWidth: index && index > 0 ? 1 : 0,
+          borderTopWidth: index && index > 0 ? StyleSheet.hairlineWidth : 0,
           marginBottom: index === radio_stations.value?.length - 1 ? BOTTOM + RFVALUE(100) : 0,
+          borderColor: '#aaa',
         },
       ]}
       onPress={() => setActiveTrack(item)}
     >
       <View style={{ width: '80%' }}>
-        <Typography text={`${item?.title}`} />
-        <Typography text={`${item?.website}`} bold />
+        <Typography text={`${item?.title}`} color={isDarkMode ? '#fff' : '#000'} />
+        <Typography text={item?.stream ?? item?.website} bold color={'#aaa'} />
+        <Typography text={item?.website} bold size={12} />
       </View>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <LucideHeart style={{ marginLeft: RFVALUE(15) }} />
+        <LucideHeart style={{ marginLeft: RFVALUE(15) }} color="#ff0000" />
       </View>
     </Pressable>
   );
