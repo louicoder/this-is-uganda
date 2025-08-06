@@ -2,9 +2,10 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home } from '@/screens/home/index';
-import { HomeIcon, Binoculars, UserRound, Search } from 'lucide-react-native';
+import { HomeIcon, Binoculars, UserRound, Search, AudioWaveform } from 'lucide-react-native';
 import { useTheme } from '@/hooks/useTheme';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Radios from '@/components/Radios';
+import { useResponsiveFontSize } from '@/hooks/useDimensions';
 const Tab = createBottomTabNavigator();
 
 const SearchScreen = () => (
@@ -31,53 +32,47 @@ const Comp = ({ name }: { name: string }) => (
   </View>
 );
 
-export default function BottomTabsNavigator () {
+export default function BottomTabsNavigator() {
   const { isDarkMode } = useTheme();
-  // const bottom = useSafeAreaInsets().bottom;
+  const { RFVALUE } = useResponsiveFontSize();
+
   return (
     <Tab.Navigator
-      safeAreaInsets={undefined}
-      tabBar={props => null}
-      // screenLayout={props => (
-      //   <View
-      //     style={{flex: 1, backgroundColor: isDarkMode ? 'black' : 'white'}}>
-      //     {props.children}
-      //   </View>
-      // )}
       screenOptions={({ route }) => ({
         headerShown: false,
         sceneStyle: {
-          // backgroundColor: isDarkMode ? 'black' : 'red',
+          backgroundColor: isDarkMode ? '#1E1E1E' : '#ffffff',
         },
 
         // headerShown: false,
-        tabBarStyle: { backgroundColor: isDarkMode ? 'black' : 'white' },
+        tabBarStyle: { backgroundColor: isDarkMode ? 'black' : 'white', height: RFVALUE(50) },
 
         // animation: 'shift',
         tabBarIcon: ({ color }) => {
           switch (route.name) {
             case 'Home':
-              return <HomeIcon color={color} size={24} />;
+              return <HomeIcon color={color} size={22} />;
             case 'Search':
-              return <Search color={color} size={24} />;
+              return <Search color={color} size={22} />;
             case 'Profile':
-              return <UserRound color={color} size={24} />;
-
+              return <UserRound color={color} size={22} />;
+            case 'Radio':
+              return <AudioWaveform color={color} size={22} />;
             case 'Destination':
-              return <Binoculars color={color} size={24} />;
+              return <Binoculars color={color} size={22} />;
           }
         },
         tabBarInactiveTintColor: isDarkMode ? 'white' : 'black',
         tabBarActiveTintColor: isDarkMode ? '#aaa' : 'black',
         tabBarButton: props => (
-          <Pressable
-            onPress={props.onPress}
-            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Pressable onPress={props.onPress} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             {props.children}
           </Pressable>
         ),
-      })}>
+      })}
+    >
       <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Radio" component={Radios} />
       <Tab.Screen name="Search" component={SearchScreen} />
       <Tab.Screen name="Destination" component={DestinationScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
