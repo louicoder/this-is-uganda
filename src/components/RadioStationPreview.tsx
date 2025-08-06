@@ -2,7 +2,7 @@ import { View, Pressable, StyleSheet } from 'react-native';
 import React, { useCallback } from 'react';
 import { TrackProps } from '@/types/radio';
 import { activeTrack, radio_stations } from '@/signals/radio';
-import { useResponsiveFontSize } from '@/hooks/useDimensions';
+import { useResponsiveFontSize } from '@/hooks/useResponsiveScreen';
 import Typography from './Typography';
 import { isRadioPlayerVisible } from '@/signals/global';
 import { LucideHeart } from 'lucide-react-native';
