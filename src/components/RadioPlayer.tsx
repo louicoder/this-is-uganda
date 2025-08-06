@@ -76,7 +76,7 @@ const RadioPlayer: React.FC = () => {
 
   return (
     <Animated.View style={[styles.mainContainer, { height: viewHeight }, playerStyles]}>
-      <Animated.View style={[styles.container, { backgroundColor: isDarkMode ? '#1E1E1E' : '#000', height: viewHeight, marginBottom: BOTTOM }]}>
+      <Animated.View style={[styles.container, { backgroundColor: isDarkMode ? '#000000ff' : '#000', height: viewHeight, marginBottom: BOTTOM }]}>
         <View style={styles.textContainer}>
           <Visualizer color="#fff" />
           <View style={{ paddingLeft: RFVALUE(10) }}>
