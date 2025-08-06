@@ -5,7 +5,7 @@ import { Home } from '@/screens/home/index';
 import { HomeIcon, Binoculars, UserRound, Search, AudioWaveform } from 'lucide-react-native';
 import { useTheme } from '@/hooks/useTheme';
 import Radios from '@/components/Radios';
-import { useResponsiveFontSize } from '@/hooks/useDimensions';
+import { useResponsiveFontSize } from '@/hooks/useResponsiveScreen';
 const Tab = createBottomTabNavigator();
 
 const SearchScreen = () => (
