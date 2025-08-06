@@ -1,15 +1,12 @@
 import { View, StatusBar } from 'react-native';
-import React, { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect } from 'react';
 import { getRadioChannels } from '@/requests/radio';
-import { useSignal } from '@preact/signals-react';
 import { LegendList } from '@legendapp/list';
 import Typography from './Typography';
 import { useSignals } from '@preact/signals-react/runtime';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import RadioStationsList from './RadioStationsList';
-import Modal from 'react-native-modal';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TrackProps } from '@/types/radio';
-import { activeTrack, isRadioPlaying, radio_stations } from '@/signals/radio';
+import { activeTrack, radio_stations } from '@/signals/radio';
 import RadioStationPreview from './RadioStationPreview';
 import { useTheme } from '@/hooks/useTheme';
 import { RFVALUE } from '@/constants/index';
@@ -21,8 +18,6 @@ const Radios: React.FC = ({ navigation }) => {
   useSignals();
   const { top: TOP, bottom: BOTTOM } = useSafeAreaInsets();
   const { isDarkMode } = useTheme();
-  const placeId = useSignal('');
-  const visible = useSignal(false);
 
   useFocusEffect(
     useCallback(() => {
