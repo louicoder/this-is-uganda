@@ -9,7 +9,7 @@ import { runOnUI } from 'react-native-worklets';
 
 type VisualizerProps = {
   color: string;
-  maxHeight: number;
+  maxHeight?: number;
 };
 const Visualizer: React.FC<VisualizerProps> = ({ color = '#00ffdf', maxHeight = 30 }) => {
   const MIN_HEIGHT = RFVALUE(0);
