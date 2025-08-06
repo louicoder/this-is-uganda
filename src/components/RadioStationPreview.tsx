@@ -8,6 +8,7 @@ import { isRadioPlayerVisible } from '@/signals/global';
 import { LucideHeart } from 'lucide-react-native';
 import { RFVALUE } from '@/constants/index';
 import { useTheme } from '@/hooks/useTheme';
+import { AudioPro } from 'react-native-audio-pro';
 
 type StationProps = {
   item: TrackProps;
@@ -21,6 +22,7 @@ const RadioStationPreview: React.FC<StationProps> = ({ item, index }) => {
   const setActiveTrack = useCallback(
     (track: TrackProps) => {
       if (activeTrack.value?.id !== track?.id) {
+        AudioPro.stop();
         isRadioPlayerVisible.value = true;
         activeTrack.value = track;
       }
@@ -41,9 +43,9 @@ const RadioStationPreview: React.FC<StationProps> = ({ item, index }) => {
       onPress={() => setActiveTrack(item)}
     >
       <View style={{ width: '80%' }}>
-        <Typography text={`${item?.title}`} color={isDarkMode ? '#fff' : '#000'} />
+        <Typography text={`${item?.title}`} color={isDarkMode ? '#fff' : '#000'} size={18} />
+        <Typography text={item?.website} bold size={12} color={isDarkMode ? '#fff' : '#000'} />
         <Typography text={item?.stream ?? item?.website} bold color={'#aaa'} />
-        <Typography text={item?.website} bold size={12} />
       </View>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <LucideHeart style={{ marginLeft: RFVALUE(15) }} color="#ff0000" />

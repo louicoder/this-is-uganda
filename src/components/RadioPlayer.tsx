@@ -45,7 +45,7 @@ const RadioPlayer: React.FC = () => {
   }, [activeTrack.value, isRadioPlaying.value]);
 
   useSignalEffect(() => {
-    const track = activeTrack.peek();
+    const track = activeTrack.value;
     if (track?.url !== '') playAudioTrack();
   });
 

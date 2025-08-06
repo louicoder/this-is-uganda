@@ -25,7 +25,7 @@ const Visualizer: React.FC<VisualizerProps> = ({ color = '#00ffdf', maxHeight = 
   useSignalEffect(() => {
     // We use this to pause the animation when the player is no longer visible
     // This helps with memory management. Only animating when it's visible.
-    if (isRadioPlayerVisible.value === false) stopAnimations();
+    // if (isRadioPlayerVisible.value === false) stopAnimations();
   });
 
   useSignalEffect(() => {
