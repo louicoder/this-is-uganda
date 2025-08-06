@@ -82,8 +82,7 @@ const Radios: React.FC = ({ navigation }) => {
   const keyExtractor = useCallback((item: TrackProps) => item?.id, []);
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      {/* <StatusBar translucent backgroundColor={'transparent'} /> */}
+    <View style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
         <LegendList
           data={[...radio_stations.value?.sort((a, b) => a.title?.localeCompare(b?.title))]}
