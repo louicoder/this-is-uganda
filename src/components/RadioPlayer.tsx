@@ -4,7 +4,7 @@ import { useSignalEffect, useSignals } from '@preact/signals-react/runtime';
 import { isRadioPlayerVisible } from '@/signals/global';
 import { runOnUI } from 'react-native-worklets';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { useResponsiveFontSize } from '@/hooks/useDimensions';
+import { useResponsiveFontSize } from '@/hooks/useResponsiveScreen';
 import Typography from './Typography';
 import { LucideHeart, LucidePause, LucidePlay, LucideX } from 'lucide-react-native';
 import { AudioPro } from 'react-native-audio-pro';
