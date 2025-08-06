@@ -15,5 +15,5 @@ export interface TypographyProps extends TextProps {
   onLongPress?: () => void;
   align?: 'left' | 'center' | 'right' | 'justify';
   transform?: 'none' | 'capitalize' | 'uppercase' | 'lowercase';
-  text: string;
+  text?: string;
 }
