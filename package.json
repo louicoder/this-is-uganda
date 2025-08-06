@@ -30,6 +30,7 @@
     "react-native-config": "^1.5.5",
     "react-native-gesture-handler": "^2.25.0",
     "react-native-mmkv": "^3.2.0",
+    "react-native-modal": "^14.0.0-rc.1",
     "react-native-nitro-haptics": "^0.1.0",
     "react-native-nitro-modules": "^0.27.2",
     "react-native-ota-hot-update": "^2.2.9",
