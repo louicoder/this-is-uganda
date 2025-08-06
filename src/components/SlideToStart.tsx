@@ -29,7 +29,7 @@ const SlideToStart = () => {
   const updateText = (progress: number) => {
     if (progress >= 1) {
       setText('Completed!');
-    }  else if (progress > 0.3) {
+    } else if (progress > 0.3) {
       setText('Keep sliding...');
     } else {
       setText('Slide to Start');
@@ -61,17 +61,10 @@ const SlideToStart = () => {
       'worklet';
       const maxDrag = trackWidth - thumbWidth;
       const progress = transX.value / maxDrag;
-
-      // if (progress === 1) { // 95% completion threshold
-      //   runOnJS(setText)('Completed!');
-      //   // Trigger your completion action here
-      // } else {
-      //   transX.value = withSpring(0, {
-      //     overshootClamping: true,
-      //   });
-      //   runOnJS(setText)('Slide to Start');
-      // }
-      if(progress !== 1) transX.value = 0
+      if (progress !== 1) {
+        transX.value = withSpring(0);
+        runOnJS(updateText)(0);
+      }
     });
 
   const dragStyle = useAnimatedStyle(() => {
@@ -110,8 +103,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    width:'100%',
-    borderWidth:1
+    width: '100%',
   },
   track: {
     height: 50,
