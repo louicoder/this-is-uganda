@@ -1,7 +1,7 @@
 // Typography.types.ts
 
-import {ReactNode} from 'react';
-import {TextProps} from 'react-native';
+import { ReactNode } from 'react';
+import { TextProps } from 'react-native';
 
 export interface TypographyProps extends TextProps {
   children?: ReactNode;
