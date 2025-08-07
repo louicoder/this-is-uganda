@@ -6,5 +6,6 @@ module.exports = {
     'react-native/no-unused-styles': 'error',
     'react-native/split-platform-components': 'warn',
     'react-native/no-single-element-style-arrays': 'warn',
+    'max-len': ['error', { code: 150 }],
   },
 };
