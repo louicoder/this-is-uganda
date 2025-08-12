@@ -1,24 +1,27 @@
 import React, { useLayoutEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Button, Typography } from '@/components/index';
+import { Typography } from '@/components/index';
 import { useTheme } from '@/hooks/useTheme';
-import Radios from '@/components/Radios';
-import SlideToStart from '@/components/SlideToStart';
 import { RFVALUE } from '@/constants/index';
-import { LucideHome, LucideLink, LucideMoon, LucideSun, LucideUnlink } from 'lucide-react-native';
-import TabBar from '@/components/Tabs';
+import { LucideHome, LucideMoon, LucideSun } from 'lucide-react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSignals } from '@preact/signals-react/runtime';
-import { isConnected } from '@/signals/global';
+import { useSignal } from '@preact/signals-react';
+import { onBackgroundLongerThan } from '@/helpers/appLifecycleManager';
+import { ThresholdCallbackParams } from '@/types/appLifecycle';
 
 export default function Home({ navigation }) {
   useSignals();
+  const timeAway = useSignal<ThresholdCallbackParams>({ diffHr: 0, diffMin: 0, diffMs: 0, diffSec: 0 });
   const { toggleTheme, isDarkMode } = useTheme();
   const { top: TOP } = useSafeAreaInsets();
-
   const themeStyle = {
     backgroundColor: isDarkMode ? '#000' : '#fff',
   };
+
+  onBackgroundLongerThan(0, diff => {
+    timeAway.value = diff;
+  });
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -39,17 +42,9 @@ export default function Home({ navigation }) {
 
   return (
     <View style={[styles.container, themeStyle, { backgroundColor: isDarkMode ? '#1E1E1E' : '#fff' }]}>
-      {/* <SlideToStart /> */}
-      {isConnected.value ? (
-        <LucideLink color="#2c8d2cff" size={RFVALUE(35)} style={{ marginBottom: RFVALUE(10) }} />
-      ) : (
-        <LucideUnlink color="#ff0000" size={RFVALUE(35)} style={{ marginBottom: RFVALUE(10) }} />
-      )}
-      <Typography
-        text={`INTERNET ${isConnected.value ? 'CONNECTED' : 'DISCONNECTED'}`}
-        size={18}
-        color={isConnected.value ? '#2c8d2cff' : '#ff0000'}
-      />
+      <Typography text={`Time away from app\n`} style={{ textAlign: 'center' }} size={20} color={isDarkMode ? '#fff' : '#000'}>
+        <Typography size={30} text={`${timeAway.value?.diffMin} mins   |   ${timeAway.value?.diffSec} secs `} color={isDarkMode ? '#aaa' : '#000'} />
+      </Typography>
 
       <TouchableOpacity style={[styles.themeToggle, { borderColor: isDarkMode ? '#aaa' : '#ddd' }]} onPress={toggleDarkMode}>
         {isDarkMode ? <LucideSun color={isDarkMode ? '#aaa' : 'black'} size={30} /> : <LucideMoon color={isDarkMode ? '#aaa' : 'black'} size={30} />}
