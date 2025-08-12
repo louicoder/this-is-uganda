@@ -5,11 +5,14 @@ import { useTheme } from '@/hooks/useTheme';
 import Radios from '@/components/Radios';
 import SlideToStart from '@/components/SlideToStart';
 import { RFVALUE } from '@/constants/index';
-import { LucideHome, LucideMoon, LucideSun } from 'lucide-react-native';
+import { LucideHome, LucideLink, LucideMoon, LucideSun, LucideUnlink } from 'lucide-react-native';
 import TabBar from '@/components/Tabs';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSignals } from '@preact/signals-react/runtime';
+import { isConnected } from '@/signals/global';
 
 export default function Home({ navigation }) {
+  useSignals();
   const { toggleTheme, isDarkMode } = useTheme();
   const { top: TOP } = useSafeAreaInsets();
 
@@ -37,7 +40,17 @@ export default function Home({ navigation }) {
   return (
     <View style={[styles.container, themeStyle, { backgroundColor: isDarkMode ? '#1E1E1E' : '#fff' }]}>
       {/* <SlideToStart /> */}
-      <Typography text="Coming soon..." size={18} color="#aaa" />
+      {isConnected.value ? (
+        <LucideLink color="#2c8d2cff" size={RFVALUE(35)} style={{ marginBottom: RFVALUE(10) }} />
+      ) : (
+        <LucideUnlink color="#ff0000" size={RFVALUE(35)} style={{ marginBottom: RFVALUE(10) }} />
+      )}
+      <Typography
+        text={`INTERNET ${isConnected.value ? 'CONNECTED' : 'DISCONNECTED'}`}
+        size={18}
+        color={isConnected.value ? '#2c8d2cff' : '#ff0000'}
+      />
+
       <TouchableOpacity style={[styles.themeToggle, { borderColor: isDarkMode ? '#aaa' : '#ddd' }]} onPress={toggleDarkMode}>
         {isDarkMode ? <LucideSun color={isDarkMode ? '#aaa' : 'black'} size={30} /> : <LucideMoon color={isDarkMode ? '#aaa' : 'black'} size={30} />}
       </TouchableOpacity>

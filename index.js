@@ -1,26 +1,33 @@
 import {AppRegistry, StatusBar} from 'react-native';
 import Application from '@/navigation/index';
+// import Application from './App';
 import { name as appName } from './app.json';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useEffect } from 'react';
 import { useTheme } from '@/hooks/useTheme';
 import RadioPlayer from '@/components/RadioPlayer';
-import { useSignals } from '@preact/signals-react/runtime';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AudioPro, AudioProContentType, } from 'react-native-audio-pro';
 import { MMKV_STORAGE } from '@/constants';
 import { radio_stations } from '@/signals/radio';
+import { startNetworkMonitoring } from '@/helpers/networkManager';
+import { useSignals } from '@preact/signals-react/runtime';
+
+// This helper function helps monitor network status
+// and updates relevant signals when the status changes
+// It's also outside the react tree to limit re-renders.
+startNetworkMonitoring()
+
+// NETINFO.addEventListener((network) => {
+//   // console.log('NETWORK', network)
+//   isConnected.value = network.isInternetReachable && network.isConnected
+// })
 
 const App = () => {
+  useSignals()
   // useSignals should always be put at the first line of every component
   // that is using signals in order to recieve updates.
-  useSignals()
   const { isDarkMode } = useTheme()
-  
-  // TODO: listen for changes in th eMMKV STORAGE
-  // MMKV_STORAGE.addOnValueChangedListener(key => {
-  //   console.log('KEY::::>>>', key);
-  // });
 
   // This useEffect helps monitor the theme change and toggles the content
   // to be either dark when the theme is light or light when the theme is dark.
@@ -29,8 +36,8 @@ const App = () => {
   }, [isDarkMode])
 
   useEffect(() => {
-    const stations = MMKV_STORAGE.getString('STATIONS') || [];
-    radio_stations.value = JSON.parse(stations);
+    const stations = MMKV_STORAGE.getString('STATIONS') ?? [];
+    radio_stations.value = stations?.length  ? JSON.parse(stations): [];
   }, [])
   
   // We now wrap our app before with GestureHandlerRootView is order to be able to
@@ -41,6 +48,7 @@ const App = () => {
       <Application />
       <RadioPlayer />
       </SafeAreaProvider>
+      
   </GestureHandlerRootView>
 )}
 
@@ -78,3 +86,4 @@ AudioPro.configure({
 //         break;
 //     }
 //   });
+
