@@ -374,45 +374,52 @@ function handleAppStateChange(nextAppState: AppStateStatus) {
   switch (nextAppState) {
     case 'active': {
       // --- App has come to foreground ---
-      // First, flush any buffered logs produced while we were backgrounded
+      // Flush any buffered logs produced while app was backgrounded
       flushBufferedLogs();
 
       if (firstRun) {
-        // First activation since the JS process started (likely app open)
+        // First activation since JS process started (likely app launch)
         derivedStateSignal.value = 'cold_start';
         firstRun = false;
       } else if (lastBackgroundTimeSignal.value) {
-        // We have a recorded background timestamp -> measure how long we were away
+        // Calculate time difference since app went to background
         const diffMs = Date.now() - lastBackgroundTimeSignal.value;
-        timeGapSignal.value = diffMs;
 
-        // Keep a readable buffered log entry so we have a timeline when we inspect logs
-        const { sec, min, hr } = getTimeGapBreakdown(diffMs);
-        bufferedLog(`App resumed after ${sec}s (${min}m ${hr}h)`);
+        // Guard: Only proceed if diffMs is a valid positive number
+        if (diffMs > 0 && !isNaN(diffMs)) {
+          timeGapSignal.value = diffMs;
 
-        // Classify derived state based on threshold
-        if (sec >= LONG_PAUSE_THRESHOLD_SEC) {
-          derivedStateSignal.value = 'long_pause';
+          // Create human-readable breakdown for logs
+          const { sec, min, hr } = getTimeGapBreakdown(diffMs);
+          bufferedLog(`App resumed after ${sec}s (${min}m ${hr}h)`);
+
+          // Set derived lifecycle state based on pause duration
+          if (sec >= LONG_PAUSE_THRESHOLD_SEC) {
+            derivedStateSignal.value = 'long_pause';
+          } else {
+            derivedStateSignal.value = 'warm_resume';
+          }
+
+          // Notify any registered threshold listeners (e.g., onBackgroundLongerThan)
+          checkThresholdListeners(diffMs);
         } else {
-          derivedStateSignal.value = 'warm_resume';
+          // Invalid diffMs value; skip threshold callbacks to avoid false triggers
+          bufferedLog(`Skipping threshold listeners due to invalid diffMs: ${diffMs}`);
+          derivedStateSignal.value = 'warm_resume'; // Fallback state
         }
-
-        // Notify threshold listeners (e.g., onBackgroundLongerThan subscribers)
-        checkThresholdListeners(diffMs);
       } else {
-        // No last background timestamp — consider it a cold start
+        // No background timestamp found; treat as a cold start
         derivedStateSignal.value = 'cold_start';
       }
 
-      // Call any lifecycleCallbacks interested in either the raw 'active'
-      // or the derived state we just set.
+      // Run lifecycle callbacks registered for either the raw or derived 'active' state
       lifecycleCallbacks.forEach(({ targetState, callback }) => {
         try {
           if (targetState === nextAppState || targetState === derivedStateSignal.value) {
             callback();
           }
         } catch (err) {
-          // Protect the lifecycle loop from subscriber exceptions
+          // Prevent subscriber errors from breaking the lifecycle manager
           // eslint-disable-next-line no-console
           console.error('Error in lifecycle callback (active):', err);
         }

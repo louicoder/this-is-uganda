@@ -19,7 +19,7 @@ export default function Home({ navigation }) {
     backgroundColor: isDarkMode ? '#000' : '#fff',
   };
 
-  onBackgroundLongerThan(0, diff => {
+  onBackgroundLongerThan(5, diff => {
     timeAway.value = diff;
   });
 
