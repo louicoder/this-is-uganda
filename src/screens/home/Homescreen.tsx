@@ -43,7 +43,11 @@ export default function Home({ navigation }) {
   return (
     <View style={[styles.container, themeStyle, { backgroundColor: isDarkMode ? '#1E1E1E' : '#fff' }]}>
       <Typography text={`Time away from app\n`} style={{ textAlign: 'center' }} size={20} color={isDarkMode ? '#fff' : '#000'}>
-        <Typography size={30} text={`${timeAway.value?.diffMin} mins   |   ${timeAway.value?.diffSec} secs `} color={isDarkMode ? '#aaa' : '#000'} />
+        <Typography
+          size={30}
+          text={`${timeAway.value?.diffMin} mins   |   ${timeAway.value?.diffSec > 60 ? timeAway.value?.diffSec % 60 : timeAway.value?.diffSec} secs `}
+          color={isDarkMode ? '#aaa' : '#000'}
+        />
       </Typography>
 
       <TouchableOpacity style={[styles.themeToggle, { borderColor: isDarkMode ? '#aaa' : '#ddd' }]} onPress={toggleDarkMode}>
