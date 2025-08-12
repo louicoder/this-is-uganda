@@ -1,28 +1,22 @@
 // src/hooks/useTheme.ts
-import {Appearance} from 'react-native';
-import {signal, computed, useSignal} from '@preact/signals-react';
-import {useSignals} from '@preact/signals-react/runtime';
-import {themePreference} from '@/signals/theme';
-import {ThemePreference, UseThemeReturn} from '@/types/theme';
+import { Appearance } from 'react-native';
+import { signal, computed, useSignal } from '@preact/signals-react';
+import { useSignals } from '@preact/signals-react/runtime';
+import { themePreference } from '@/signals/theme';
+import { ThemePreference, UseThemeReturn } from '@/types/theme';
 
 // 2. Signal to track system color scheme
-const systemTheme = signal<'light' | 'dark'>(
-  Appearance.getColorScheme() === 'dark' ? 'dark' : 'light',
-);
+const systemTheme = signal<'light' | 'dark'>(Appearance.getColorScheme() === 'dark' ? 'dark' : 'light');
 
 // 3. Listen to system changes
-Appearance.addChangeListener(({colorScheme}) => {
+Appearance.addChangeListener(({ colorScheme }) => {
   if (colorScheme) {
     systemTheme.value = colorScheme === 'dark' ? 'dark' : 'light';
   }
 });
 
 // 4. Compute the effective theme
-const effectiveTheme = computed(() =>
-  themePreference.value === 'system'
-    ? systemTheme.value
-    : themePreference.value,
-);
+const effectiveTheme = computed(() => (themePreference.value === 'system' ? systemTheme.value : themePreference.value));
 
 const isDarkMode = computed(() => effectiveTheme.value === 'dark');
 

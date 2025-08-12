@@ -1829,6 +1829,8 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
+  - react-native-netinfo (11.4.1):
+    - React-Core
   - react-native-ota-hot-update (2.3.1):
     - boost
     - DoubleConversion
@@ -2838,6 +2840,7 @@ DEPENDENCIES:
   - react-native-compressor (from `../node_modules/react-native-compressor`)
   - react-native-config (from `../node_modules/react-native-config`)
   - react-native-mmkv (from `../node_modules/react-native-mmkv`)
+  - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-ota-hot-update (from `../node_modules/react-native-ota-hot-update`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -2983,6 +2986,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-config"
   react-native-mmkv:
     :path: "../node_modules/react-native-mmkv"
+  react-native-netinfo:
+    :path: "../node_modules/@react-native-community/netinfo"
   react-native-ota-hot-update:
     :path: "../node_modules/react-native-ota-hot-update"
   react-native-safe-area-context:
@@ -3112,6 +3117,7 @@ SPEC CHECKSUMS:
   react-native-compressor: f2e1b4cd1dd670126dd9b9d36b521fdecdaab2f8
   react-native-config: 3367df9c1f25bb96197007ec531c7087ed4554c3
   react-native-mmkv: a975a5ef60a8ef763bff82ffbca7d9292ea052ac
+  react-native-netinfo: f0a9899081c185db1de5bb2fdc1c88c202a059ac
   react-native-ota-hot-update: 722bda10d77f570bf75e6e6ec508f5cae4d4a107
   react-native-safe-area-context: 339885703b6dd1be2bce42d9c0b0350c21180032
   React-NativeModulesApple: b22e6abb44d78270dfdfc7d85efe29e35e0333a7
