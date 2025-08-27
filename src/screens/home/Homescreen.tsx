@@ -9,6 +9,7 @@ import { useSignals } from '@preact/signals-react/runtime';
 import { useSignal } from '@preact/signals-react';
 import { onBackgroundLongerThan } from '@/helpers/appLifecycleManager';
 import { ThresholdCallbackParams } from '@/types/appLifecycle';
+import { HeaderBackground } from '@react-navigation/elements';
 
 export default function Home({ navigation }) {
   useSignals();
@@ -16,7 +17,7 @@ export default function Home({ navigation }) {
   const { toggleTheme, isDarkMode } = useTheme();
   const { top: TOP } = useSafeAreaInsets();
   const themeStyle = {
-    backgroundColor: isDarkMode ? '#000' : '#fff',
+    // backgroundColor: isDarkMode ? '#000' : '#fff',
   };
 
   onBackgroundLongerThan(5, diff => {
@@ -27,18 +28,26 @@ export default function Home({ navigation }) {
     navigation.setOptions({
       headerShown: true,
       header: () => (
-        <View style={{}}>
-          <View style={{ height: TOP, ...themeStyle }} />
-          <View style={[styles.header, themeStyle]}>
-            <LucideHome style={{ marginRight: RFVALUE(10) }} color={isDarkMode ? '#fff' : '#000'} />
-            <Typography text="Home" size={16} color={isDarkMode ? '#fff' : '#000'} />
+        <HeaderBackground style={{ width: '100%', height: 50, backgroundColor: 'tomato' }}>
+          <View style={{}}>
+            <View style={{ height: TOP, ...themeStyle }} />
+            <View style={[styles.header, themeStyle]}>
+              <LucideHome style={{ marginRight: RFVALUE(10) }} color={isDarkMode ? '#fff' : '#000'} />
+              <Typography text="Home" size={16} color={isDarkMode ? '#fff' : '#000'} />
+            </View>
           </View>
-        </View>
+        </HeaderBackground>
       ),
     });
   }, [navigation, isDarkMode, TOP]);
 
   const toggleDarkMode = () => toggleTheme();
+
+  // return (
+  //   <View style={{ flex: 1 }}>
+  //     <Image source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNbkECXtEG_6-RV7CSNgNoYUGZE-JCliYm9g&s' }} style={{ flex: 1 }} />
+  //   </View>
+  // );
 
   return (
     <View style={[styles.container, themeStyle, { backgroundColor: isDarkMode ? '#1E1E1E' : '#fff' }]}>
