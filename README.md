@@ -1,4 +1,3 @@
-
 # 🇺🇬 This is Uganda
 
 A React Native CLI app built with the **new architecture** (TurboModules, Fabric, JSI, and NitroModules).  
@@ -193,16 +192,25 @@ yarn format
 # License
 This project is licensed under the [MIT License](./LICENSE).
 
-# Contributors
+## Contributors ✨
+
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ssewilliam"><img src="https://avatars.githubusercontent.com/u/21138053?v=4?s=100" width="100px;" alt="ssewilliam"/><br /><sub><b>ssewilliam</b></sub></a><br /><a href="https://github.com/Tambulab/this-is-uganda/commits?author=ssewilliam" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
-This project follows the [all-contributors](https://allcontributors.org) specification.
-Contributions of any kind are welcome!
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
