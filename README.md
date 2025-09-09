@@ -103,11 +103,9 @@ this-is-uganda/
 │   ├── components/ # Shared components
 │   ├── navigation/ # Navigation setup
 │   ├── screens/    # Screen components
-│   ├── signals/    # Signals state management
-│   └── utils/      # utilities
-│   └── helpers/    # Helpers functions
-│   └── types/      # Typescript global types definitons
-├── index.js        # Entry point
+│   ├── state/      # Signals state management
+│   └── utils/      # Helpers & utilities
+├── App.tsx         # Entry point
 └── ...
 ```
 
@@ -186,10 +184,6 @@ yarn format
 * Ensure code passes linting & tests before submitting.
 * Add yourself to the [Contributors](#contributors-) list with the All Contributors bot by commenting:
 
-  ```
-  @all-contributors please add @your-username for code
-  ```
-
 
 # License
 This project is licensed under the [MIT License](./LICENSE).
@@ -204,7 +198,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ssewilliam"><img src="https://avatars.githubusercontent.com/u/21138053?v=4?s=100" width="100px;" alt="ssewilliam"/><br /><sub><b>ssewilliam</b></sub></a><br /><a href="https://github.com/Tambulab/this-is-uganda/commits?author=ssewilliam" title="Code">💻</a></td>
+      <td valign="top" width="100px"><a href="https://github.com/louicoder"><img src="https://avatars.githubusercontent.com/u/32771081?v=4?s=100" width="100px;" alt="louicoder"/><br /><sub><b>louicoder</b></sub></a><br /><a href="https://github.com/Tambulab/this-is-uganda/commits?author=louicoder" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
@@ -215,4 +209,3 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
