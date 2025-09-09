@@ -10,7 +10,7 @@ module.exports = {
         },
       },
     ],
-    // Everyhting should be above this.
-    'react-native-reanimated/plugin',
+    // Everything should be above this.
+    'react-native-worklets/plugin',
   ],
 };
