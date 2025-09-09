@@ -104,9 +104,11 @@ this-is-uganda/
 │   ├── components/ # Shared components
 │   ├── navigation/ # Navigation setup
 │   ├── screens/    # Screen components
-│   ├── state/      # Signals state management
-│   └── utils/      # Helpers & utilities
-├── App.tsx         # Entry point
+│   ├── signals/    # Signals state management
+│   └── utils/      # utilities
+│   └── helpers/    # Helpers functions
+│   └── types/      # Typescript global types definitons
+├── index.js        # Entry point
 └── ...
 ```
 
