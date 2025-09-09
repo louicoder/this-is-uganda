@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "louicoder",
+      "name": "Musanje Louis Michael",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32771081?v=4",
+      "profile": "https://www.linkedin.com/in/louicoder",
+      "contributions": [
+        "maintenance"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "this-is-uganda",
+  "projectOwner": "Tambulab"
+}
