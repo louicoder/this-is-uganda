@@ -1,103 +1,196 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+# 🇺🇬 This is Uganda
 
-# Getting Started
+A React Native CLI app built with the **new architecture** (TurboModules, Fabric, JSI, and NitroModules).  
+Explore Uganda’s beauty through modern mobile engineering practices.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+![React Native](https://img.shields.io/badge/React%20Native-0.73%2B-blue)
+![Yarn](https://img.shields.io/badge/Package%20Manager-Yarn-2188B6?logo=yarn)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-## Step 1: Start Metro
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+# 📑 Table of Contents
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Prerequisites](#-prerequisites)
+- [Installation](#-installation)
+- [Running the App](#-running-the-app)
+- [Project Structure](#-project-structure)
+- [Testing](#-testing)
+- [Linting & Formatting](#-linting--formatting)
+- [Troubleshooting](#-troubleshooting)
+- [Contributing](#-contributing)
+- [Contributors](#-contributors-)
+- [License](#-license)
 
-To start the Metro dev server, run the following command from the root of your React Native project:
 
-```sh
-# Using npm
-npm start
+# ✨ Features
+- ⚡️ **New React Native Architecture** (TurboModules, Fabric Renderer, JSI, NitroModules).  
+- 📱 **Cross-platform**: Android + iOS support.  
+- 🧭 **React Navigation** for smooth app navigation.  
+- ⚛️ **Signals state management** via [`@preact/signals-react`](https://www.npmjs.com/package/@preact/signals-react).  
+- 🔧 Strict **TypeScript** typing.  
+- 🎨 Code style enforced with **ESLint + Prettier**.  
+- 📂 Clear modular file structure.
 
-# OR using Yarn
+# 🛠 Tech Stack
+- [React Native CLI](https://reactnative.dev/docs/environment-setup)  
+- [React Navigation](https://reactnavigation.org/)  
+- [@preact/signals-react](https://github.com/preactjs/signals)  
+- [TypeScript](https://www.typescriptlang.org/)  
+- [Yarn](https://yarnpkg.com/)  
+- [ESLint](https://eslint.org/) & [Prettier](https://prettier.io/)  
+
+
+# 📋 Prerequisites
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (≥ 18.x recommended)  
+- [Yarn](https://classic.yarnpkg.com/en/docs/install)  
+- [React Native CLI](https://reactnative.dev/docs/environment-setup)  
+- [Xcode](https://developer.apple.com/xcode/) (for iOS)  
+- [Android Studio](https://developer.android.com/studio) (for Android)  
+- [CocoaPods](https://guides.cocoapods.org/using/getting-started.html) (for iOS dependencies)
+
+
+# 📦 Installation
+
+Clone the repo and install dependencies:
+
+```bash
+git clone https://github.com/Tambulab/this-is-uganda.git
+cd this-is-uganda
+yarn install
+````
+
+Install iOS dependencies:
+
+```bash
+cd ios && pod install && cd ..
+```
+
+
+## ▶️ Running the App
+
+Start the Metro bundler:
+
+```bash
 yarn start
 ```
 
-## Step 2: Build and run your app
+Run on Android:
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
+```bash
 yarn android
 ```
 
-### iOS
+Run on iOS:
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
+```bash
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+# 🏗 Project Structure
 
-## Step 3: Modify your app
+For full details see [file-structure.md](./file-structure.md).
+Key directories:
 
-Now that you have successfully run the app, let's make changes!
+```
+this-is-uganda/
+├── android/        # Native Android code
+├── ios/            # Native iOS code
+├── src/            # App source code
+│   ├── components/ # Shared components
+│   ├── navigation/ # Navigation setup
+│   ├── screens/    # Screen components
+│   ├── state/      # Signals state management
+│   └── utils/      # Helpers & utilities
+├── App.tsx         # Entry point
+└── ...
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+# 🧪 Testing
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+Run unit tests with:
 
-## Congratulations! :tada:
+```bash
+yarn test
+```
 
-You've successfully run and modified your React Native App. :partying_face:
 
-### Now what?
+# 🎨 Linting & Formatting
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+Check linting issues:
 
-# Troubleshooting
+```bash
+yarn lint
+```
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+Format code with Prettier:
 
-# Learn More
+```bash
+yarn format
+```
 
-To learn more about React Native, take a look at the following resources:
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+# 🐛 Troubleshooting
+
+* **Metro bundler not starting?**
+  Clear the cache:
+
+  ```bash
+  yarn start --reset-cache
+  ```
+
+* **iOS pods not working?**
+  Run:
+
+  ```bash
+  cd ios && pod install --repo-update
+  ```
+
+* **Android build issues?**
+  Ensure you’ve installed the correct JDK + Android SDK.
+
+
+# Workflow
+
+1. **Create a new branch** for your work:
+
+   ```bash
+   git checkout -b feature/my-feature
+   ```
+2. **Make your changes** and commit them with clear messages:
+
+   ```bash
+   git commit -m "Add: short description of change"
+   ```
+3. **Push your branch** to the repo:
+
+   ```bash
+   git push origin feature/my-feature
+   ```
+4. **Open a Pull Request (PR)** to merge your branch into `dev`.
+
+# Contribution Guidelines
+
+* Use **descriptive branch names**:
+
+  * `feature/awesome-feature`
+  * `fix/bug-description`
+  * `chore/dependency-update`
+* Keep commits focused — avoid mixing unrelated changes.
+* Ensure code passes linting & tests before submitting.
+* Add yourself to the [Contributors](#contributors-) list with the All Contributors bot by commenting:
+
+  ```
+  @all-contributors please add @your-username for code
+  ```
+
+
+# License
+This project is licensed under the [MIT License](./LICENSE).
 
 ## Contributors ✨
 
@@ -109,7 +202,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/louicoder"><img src="https://avatars.githubusercontent.com/u/32771081?v=4?s=100" width="100px;" alt="Musanje Louis Michael"/><br /><sub><b>Musanje Louis Michael</b></sub></a><br /><a href="#maintenance-louicoder" title="Maintenance">🚧</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/ssewilliam"><img src="https://avatars.githubusercontent.com/u/21138053?v=4?s=100" width="100px;" alt="ssewilliam"/><br /><sub><b>ssewilliam</b></sub></a><br /><a href="https://github.com/Tambulab/this-is-uganda/commits?author=ssewilliam" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
@@ -120,3 +213,4 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
