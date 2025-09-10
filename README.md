@@ -200,6 +200,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td valign="top" width="100px"><a href="https://github.com/louicoder"><img src="https://avatars.githubusercontent.com/u/32771081?v=4?s=100" width="100px;" alt="louicoder"/><br /><sub><b>louicoder</b></sub></a><br /><a href="https://github.com/Tambulab/this-is-uganda/commits?author=louicoder" title="Code">💻</a></td>
     </tr>
+    <td valign="top" width="100px">
+        <a href="https://github.com/ssewilliam">
+            <img src="https://avatars.githubusercontent.com/u/21138053?v=4?s=100" width="100px;" alt="ssewilliam"/><br />
+            <sub><b>ssewilliam</b></sub>
+        </a>
+        <br /><a href="https://github.com/Tambulab/this-is-uganda/commits?author=ssewilliam" title="Code">💻</a>
+    </td>
   </tbody>
 </table>
 
