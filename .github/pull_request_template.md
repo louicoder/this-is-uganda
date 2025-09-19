@@ -1,4 +1,3 @@
-
 ## Description
 <!-- ❗ Replace this text with a clear and concise description of your changes.
      Do NOT leave this section unchanged. -->
@@ -10,7 +9,6 @@ This PR adds a new endpoint for user profile updates.
 - Updates documentation to include new endpoint
 - Includes unit tests and integration tests for validation and response codes
 
----
 
 ## Related Issue(s)
 <!-- ❗ Replace with linked issue(s) in the format: Fixes #123 or Closes #456
@@ -45,4 +43,9 @@ Example: `Fixes #123` (replace this line.)
 - [x] I have added/updated tests where applicable
 - [x] All new and existing tests pass
 - [x] I have considered edge cases and potential risks
+
+
+## Screenshots (if applicable)
+<!-- ❗ Add screenshots, GIFs, or screen recordings of UI changes here.
+     Leave blank if not applicable. -->
 
