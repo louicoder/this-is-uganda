@@ -4,19 +4,50 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 
+/**
+ * Class to manage and update version numbers and build numbers
+ * for a React Native project, including Android and iOS.
+ */
 class VersionManager {
+    /**
+     * Initializes the VersionManager.
+     * Sets up readline interface for user input and determines paths
+     * to package.json, Android build.gradle, and iOS project.pbxproj.
+     */
     constructor() {
+        /**
+         * @type {readline.Interface} Interface for reading user input
+         */
         this.rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout,
         });
 
+        /**
+         * @type {string} Root directory of the project
+         */
         this.projectRoot = process.cwd();
+
+        /**
+         * @type {string} Path to package.json
+         */
         this.packageJsonPath = path.join(this.projectRoot, 'package.json');
+
+        /**
+         * @type {string} Path to Android build.gradle
+         */
         this.androidGradlePath = path.join(this.projectRoot, 'android', 'app', 'build.gradle');
+
+        /**
+         * @type {string|null} Path to iOS project.pbxproj if found
+         */
         this.iosProjectPath = this.findIOSProjectFile();
     }
 
+    /**
+     * Creates a backup of a file with a .bak extension.
+     * @param {string} filePath - The path of the file to back up.
+     */
     backupFile(filePath) {
         if (!filePath || !fs.existsSync(filePath)) return;
         const backupPath = filePath + '.bak';
@@ -28,6 +59,11 @@ class VersionManager {
         }
     }
 
+    /**
+     * Searches for the iOS Xcode project file (.xcodeproj) and returns the path
+     * to its project.pbxproj file.
+     * @returns {string|null} Path to project.pbxproj or null if not found
+     */
     findIOSProjectFile() {
         const iosDir = path.join(this.projectRoot, 'ios');
         if (!fs.existsSync(iosDir)) return null;
@@ -38,12 +74,21 @@ class VersionManager {
         return xcodeProject ? path.join(iosDir, xcodeProject, 'project.pbxproj') : null;
     }
 
+    /**
+     * Prompts the user with a question and returns the input.
+     * @param {string} query - The question to display to the user.
+     * @returns {Promise<string>} User input
+     */
     async question(query) {
         return new Promise(resolve => {
             this.rl.question(query, resolve);
         });
     }
 
+    /**
+     * Reads the current version from package.json.
+     * @returns {string|null} Current version string or null if an error occurs
+     */
     getCurrentPackageVersion() {
         try {
             const packageJson = JSON.parse(fs.readFileSync(this.packageJsonPath, 'utf8'));
@@ -54,11 +99,15 @@ class VersionManager {
         }
     }
 
+    /**
+     * Reads current build numbers from Android and iOS projects.
+     * @returns {{android: number|null, ios: number|null}} Build numbers for Android and iOS
+     */
     getCurrentBuildNumbers() {
         let androidBuildNumber = null;
         let iosBuildNumber = null;
 
-        // Get Android build number
+        // Android
         try {
             const gradleContent = fs.readFileSync(this.androidGradlePath, 'utf8');
             const versionCodeMatch = gradleContent.match(/versionCode\s+(\d+)/);
@@ -69,7 +118,7 @@ class VersionManager {
             console.warn('Could not read Android build.gradle:', error.message);
         }
 
-        // Get iOS build number
+        // iOS
         try {
             if (this.iosProjectPath && fs.existsSync(this.iosProjectPath)) {
                 const pbxprojContent = fs.readFileSync(this.iosProjectPath, 'utf8');
@@ -85,6 +134,11 @@ class VersionManager {
         return { android: androidBuildNumber, ios: iosBuildNumber };
     }
 
+    /**
+     * Updates the version field in package.json.
+     * @param {string} newVersion - New version string to set
+     * @returns {boolean} True if successful, false otherwise
+     */
     updatePackageJsonVersion(newVersion) {
         try {
             const packageJson = JSON.parse(fs.readFileSync(this.packageJsonPath, 'utf8'));
@@ -98,6 +152,13 @@ class VersionManager {
         }
     }
 
+    /**
+     * Updates the Android build.gradle file with a new versionName and versionCode.
+     * Creates a backup before making changes.
+     * @param {string} versionName - New version name (e.g., "1.0.0")
+     * @param {number} versionCode - New integer version code
+     * @returns {boolean} True if update succeeded, false otherwise
+     */
     updateAndroidVersion(versionName, versionCode) {
         try {
             this.backupFile(this.androidGradlePath);
@@ -108,14 +169,10 @@ class VersionManager {
 
             // Update versionName - handle different formats
             let versionNameUpdated = versionCodeUpdated.replace(/versionName\s+"[^"]*"/g, `versionName "${versionName}"`);
-
-            // Also handle single quotes
             versionNameUpdated = versionNameUpdated.replace(/versionName\s+'[^']*'/g, `versionName "${versionName}"`);
-
-            // Handle cases without quotes
             versionNameUpdated = versionNameUpdated.replace(/versionName\s+[^\s\n]+/g, `versionName "${versionName}"`);
 
-            // Verify the changes were made
+            // Verify
             const versionCodeMatch = versionNameUpdated.match(/versionCode\s+(\d+)/);
             const versionNameMatch = versionNameUpdated.match(/versionName\s+["']([^"']+)["']/);
 
@@ -135,6 +192,13 @@ class VersionManager {
         }
     }
 
+    /**
+     * Updates iOS project.pbxproj with new MARKETING_VERSION and CURRENT_PROJECT_VERSION.
+     * Creates a backup before editing.
+     * @param {string} marketingVersion - New marketing version (CFBundleShortVersionString)
+     * @param {number} projectVersion - New project version (CFBundleVersion)
+     * @returns {boolean} True if update succeeded, false otherwise
+     */
     updateIOSVersion(marketingVersion, projectVersion) {
         if (!this.iosProjectPath || !fs.existsSync(this.iosProjectPath)) {
             console.warn('⚠️  iOS project.pbxproj not found, skipping iOS update');
@@ -145,10 +209,7 @@ class VersionManager {
             this.backupFile(this.iosProjectPath);
             let pbxprojContent = fs.readFileSync(this.iosProjectPath, 'utf8');
 
-            // Update MARKETING_VERSION
             pbxprojContent = pbxprojContent.replace(/MARKETING_VERSION\s*=\s*[^;]+;/g, `MARKETING_VERSION = ${marketingVersion};`);
-
-            // Update CURRENT_PROJECT_VERSION
             pbxprojContent = pbxprojContent.replace(/CURRENT_PROJECT_VERSION\s*=\s*\d+;/g, `CURRENT_PROJECT_VERSION = ${projectVersion};`);
 
             fs.writeFileSync(this.iosProjectPath, pbxprojContent);
@@ -160,12 +221,22 @@ class VersionManager {
         }
     }
 
+    /**
+     * Prompts the user for a new version number.
+     * @param {string} currentVersion - The current version string
+     * @returns {Promise<string>} The new version input or the current version if empty
+     */
     async promptForVersion(currentVersion) {
         console.log(`\n📦 Current version: ${currentVersion}`);
         const input = await this.question('Enter new version (or press Enter to keep current): ');
         return input.trim() || currentVersion;
     }
 
+    /**
+     * Prompts the user for a build number, suggesting the next increment.
+     * @param {{android: number|null, ios: number|null}} currentBuildNumbers - Current build numbers
+     * @returns {Promise<number>} The chosen build number
+     */
     async promptForBuildNumber(currentBuildNumbers) {
         const { android, ios } = currentBuildNumbers;
         const maxBuild = Math.max(android || 0, ios || 0);
@@ -177,7 +248,6 @@ class VersionManager {
         console.log(`   Suggested next: ${suggestedBuild}`);
 
         const input = await this.question(`Use build number ${suggestedBuild}? (y/n/enter number): `);
-
         const trimmedInput = input.trim().toLowerCase();
 
         if (trimmedInput === 'y' || trimmedInput === 'yes' || trimmedInput === '') {
@@ -194,10 +264,16 @@ class VersionManager {
         }
     }
 
+    /**
+     * Executes the version and build number update process:
+     * 1. Reads current versions
+     * 2. Prompts the user for updates
+     * 3. Confirms changes
+     * 4. Applies updates to package.json, Android, and iOS
+     */
     async run() {
         console.log('🚀 React Native Version Manager\n');
 
-        // Check if we're in a React Native project
         if (!fs.existsSync(this.packageJsonPath)) {
             console.error('❌ package.json not found. Are you in a React Native project root?');
             this.rl.close();
@@ -205,7 +281,6 @@ class VersionManager {
         }
 
         try {
-            // Step 1: Handle version update
             const currentVersion = this.getCurrentPackageVersion();
             if (!currentVersion) {
                 console.error('❌ Could not read current version from package.json');
@@ -214,25 +289,20 @@ class VersionManager {
             }
 
             const newVersion = await this.promptForVersion(currentVersion);
-
-            // Step 2: Handle build number update
             const currentBuildNumbers = this.getCurrentBuildNumbers();
             const newBuildNumber = await this.promptForBuildNumber(currentBuildNumbers);
 
-            // Step 3: Confirm changes
             console.log(`\n📋 Summary of changes:`);
             console.log(`   Version: ${currentVersion} → ${newVersion}`);
             console.log(`   Build number: ${newBuildNumber}`);
 
             const confirm = await this.question('\nProceed with these changes? (y/n): ');
-
-            if (confirm.trim().toLowerCase() !== 'y' && confirm.trim().toLowerCase() !== 'yes') {
+            if (!['y', 'yes'].includes(confirm.trim().toLowerCase())) {
                 console.log('❌ Operation cancelled');
                 this.rl.close();
                 return;
             }
 
-            // Step 4: Apply changes
             console.log('\n🔄 Applying changes...\n');
 
             const packageSuccess = this.updatePackageJsonVersion(newVersion);
