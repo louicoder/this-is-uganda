@@ -8,22 +8,33 @@ class VersionManager {
     constructor() {
         this.rl = readline.createInterface({
             input: process.stdin,
-            output: process.stdout
+            output: process.stdout,
         });
-        
+
         this.projectRoot = process.cwd();
         this.packageJsonPath = path.join(this.projectRoot, 'package.json');
         this.androidGradlePath = path.join(this.projectRoot, 'android', 'app', 'build.gradle');
         this.iosProjectPath = this.findIOSProjectFile();
     }
 
+    backupFile(filePath) {
+        if (!filePath || !fs.existsSync(filePath)) return;
+        const backupPath = filePath + '.bak';
+        try {
+            fs.copyFileSync(filePath, backupPath);
+            console.log(`📦 Backup created: ${backupPath}`);
+        } catch (error) {
+            console.warn(`⚠️ Could not create backup for ${filePath}:`, error.message);
+        }
+    }
+
     findIOSProjectFile() {
         const iosDir = path.join(this.projectRoot, 'ios');
         if (!fs.existsSync(iosDir)) return null;
-        
+
         const files = fs.readdirSync(iosDir);
         const xcodeProject = files.find(file => file.endsWith('.xcodeproj'));
-        
+
         return xcodeProject ? path.join(iosDir, xcodeProject, 'project.pbxproj') : null;
     }
 
@@ -89,36 +100,25 @@ class VersionManager {
 
     updateAndroidVersion(versionName, versionCode) {
         try {
+            this.backupFile(this.androidGradlePath);
             let gradleContent = fs.readFileSync(this.androidGradlePath, 'utf8');
-            
+
             // Update versionCode
-            const versionCodeUpdated = gradleContent.replace(
-                /versionCode\s+\d+/,
-                `versionCode ${versionCode}`
-            );
-            
+            const versionCodeUpdated = gradleContent.replace(/versionCode\s+\d+/, `versionCode ${versionCode}`);
+
             // Update versionName - handle different formats
-            let versionNameUpdated = versionCodeUpdated.replace(
-                /versionName\s+"[^"]*"/g,
-                `versionName "${versionName}"`
-            );
-            
+            let versionNameUpdated = versionCodeUpdated.replace(/versionName\s+"[^"]*"/g, `versionName "${versionName}"`);
+
             // Also handle single quotes
-            versionNameUpdated = versionNameUpdated.replace(
-                /versionName\s+'[^']*'/g,
-                `versionName "${versionName}"`
-            );
-            
+            versionNameUpdated = versionNameUpdated.replace(/versionName\s+'[^']*'/g, `versionName "${versionName}"`);
+
             // Handle cases without quotes
-            versionNameUpdated = versionNameUpdated.replace(
-                /versionName\s+[^\s\n]+/g,
-                `versionName "${versionName}"`
-            );
-            
+            versionNameUpdated = versionNameUpdated.replace(/versionName\s+[^\s\n]+/g, `versionName "${versionName}"`);
+
             // Verify the changes were made
             const versionCodeMatch = versionNameUpdated.match(/versionCode\s+(\d+)/);
             const versionNameMatch = versionNameUpdated.match(/versionName\s+["']([^"']+)["']/);
-            
+
             if (versionCodeMatch && versionNameMatch) {
                 fs.writeFileSync(this.androidGradlePath, versionNameUpdated);
                 console.log(`✅ Updated Android: versionName="${versionNameMatch[1]}", versionCode=${versionCodeMatch[1]}`);
@@ -142,20 +142,15 @@ class VersionManager {
         }
 
         try {
+            this.backupFile(this.iosProjectPath);
             let pbxprojContent = fs.readFileSync(this.iosProjectPath, 'utf8');
-            
+
             // Update MARKETING_VERSION
-            pbxprojContent = pbxprojContent.replace(
-                /MARKETING_VERSION\s*=\s*[^;]+;/g,
-                `MARKETING_VERSION = ${marketingVersion};`
-            );
-            
+            pbxprojContent = pbxprojContent.replace(/MARKETING_VERSION\s*=\s*[^;]+;/g, `MARKETING_VERSION = ${marketingVersion};`);
+
             // Update CURRENT_PROJECT_VERSION
-            pbxprojContent = pbxprojContent.replace(
-                /CURRENT_PROJECT_VERSION\s*=\s*\d+;/g,
-                `CURRENT_PROJECT_VERSION = ${projectVersion};`
-            );
-            
+            pbxprojContent = pbxprojContent.replace(/CURRENT_PROJECT_VERSION\s*=\s*\d+;/g, `CURRENT_PROJECT_VERSION = ${projectVersion};`);
+
             fs.writeFileSync(this.iosProjectPath, pbxprojContent);
             console.log(`✅ Updated iOS: MARKETING_VERSION=${marketingVersion}, CURRENT_PROJECT_VERSION=${projectVersion}`);
             return true;
@@ -175,18 +170,16 @@ class VersionManager {
         const { android, ios } = currentBuildNumbers;
         const maxBuild = Math.max(android || 0, ios || 0);
         const suggestedBuild = maxBuild + 1;
-        
+
         console.log(`\n🔢 Current build numbers:`);
         if (android !== null) console.log(`   Android: ${android}`);
         if (ios !== null) console.log(`   iOS: ${ios}`);
         console.log(`   Suggested next: ${suggestedBuild}`);
-        
-        const input = await this.question(
-            `Use build number ${suggestedBuild}? (y/n/enter number): `
-        );
-        
+
+        const input = await this.question(`Use build number ${suggestedBuild}? (y/n/enter number): `);
+
         const trimmedInput = input.trim().toLowerCase();
-        
+
         if (trimmedInput === 'y' || trimmedInput === 'yes' || trimmedInput === '') {
             return suggestedBuild;
         } else if (trimmedInput === 'n' || trimmedInput === 'no') {
@@ -203,7 +196,7 @@ class VersionManager {
 
     async run() {
         console.log('🚀 React Native Version Manager\n');
-        
+
         // Check if we're in a React Native project
         if (!fs.existsSync(this.packageJsonPath)) {
             console.error('❌ package.json not found. Are you in a React Native project root?');
@@ -219,39 +212,38 @@ class VersionManager {
                 this.rl.close();
                 return;
             }
-            
+
             const newVersion = await this.promptForVersion(currentVersion);
-            
+
             // Step 2: Handle build number update
             const currentBuildNumbers = this.getCurrentBuildNumbers();
             const newBuildNumber = await this.promptForBuildNumber(currentBuildNumbers);
-            
+
             // Step 3: Confirm changes
             console.log(`\n📋 Summary of changes:`);
             console.log(`   Version: ${currentVersion} → ${newVersion}`);
             console.log(`   Build number: ${newBuildNumber}`);
-            
+
             const confirm = await this.question('\nProceed with these changes? (y/n): ');
-            
+
             if (confirm.trim().toLowerCase() !== 'y' && confirm.trim().toLowerCase() !== 'yes') {
                 console.log('❌ Operation cancelled');
                 this.rl.close();
                 return;
             }
-            
+
             // Step 4: Apply changes
             console.log('\n🔄 Applying changes...\n');
-            
+
             const packageSuccess = this.updatePackageJsonVersion(newVersion);
             const androidSuccess = this.updateAndroidVersion(newVersion, newBuildNumber);
             const iosSuccess = this.updateIOSVersion(newVersion, newBuildNumber);
-            
+
             if (packageSuccess && androidSuccess && iosSuccess) {
                 console.log('\n🎉 All updates completed successfully!');
             } else {
                 console.log('\n⚠️  Some updates failed. Please check the error messages above.');
             }
-            
         } catch (error) {
             console.error('❌ An unexpected error occurred:', error.message);
         } finally {
